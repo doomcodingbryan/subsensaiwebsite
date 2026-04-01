@@ -25,7 +25,7 @@ export default function Home() {
             <div className="hero-text">
               <h1 className="hero-title">Your personal Jiu Jitsu AI coach</h1>
               <p className="hero-subtext">Search Questions. Track Progress. Win More.</p>
-              <a href="#" className="btn-primary hero-btn">Download on iOS</a>
+              <a href="https://apps.apple.com/us/app/submissionsensai/id6751873115" className="btn-primary hero-btn" target="_blank" rel="noopener noreferrer">Download on iOS</a>
             </div>
             <div className="hero-visual">
               <img src="/images/image.png" alt="SubmissionSensAI Platform" className="hero-image" />
@@ -107,28 +107,6 @@ export default function Home() {
         {/* User Reviews Section from App Stores */}
         <ReviewsSection />
 
-        {/* Three Phone Showcase */}
-        <section className="relative w-full overflow-hidden pb-32 pt-20 flex justify-center items-center -mt-10 z-10">
-          <div className="flex justify-center items-center w-full max-w-6xl mx-auto px-4 perspective-[1000px]">
-            {/* Left Phone */}
-            <div className="iphone-mockup transform rotate-[-8deg] scale-[0.8] translate-x-24 translate-y-12 opacity-95 transition-transform duration-500 hover:scale-[0.85] hover:rotate-[-5deg] hover:z-40 z-20">
-              <div className="iphone-screen relative bg-black overflow-hidden">
-              </div>
-            </div>
-
-            {/* Center Phone */}
-            <div className="iphone-mockup transform scale-[1.05] z-30 shadow-[0_30px_60px_rgba(0,0,0,0.4)] transition-transform duration-500 hover:scale-[1.1]">
-              <div className="iphone-screen relative bg-black overflow-hidden">
-              </div>
-            </div>
-
-            {/* Right Phone */}
-            <div className="iphone-mockup transform rotate-[8deg] scale-[0.8] -translate-x-24 translate-y-12 opacity-95 transition-transform duration-500 hover:scale-[0.85] hover:rotate-[5deg] hover:z-40 z-20">
-              <div className="iphone-screen relative bg-black overflow-hidden">
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* The new Shadcn Pricing Section */}
         <section id="pricing">

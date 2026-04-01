@@ -21,10 +21,10 @@ const testimonialsData = [
     {
         id: 3,
         quote:
-            "A seamless experience from start to finish. Josh made our app design and experience really impressive.",
-        name: "Nick Albin",
-        role: "Creator of Chew Jitsu",
-        imageSrc: "/images/chewjitsu.png",
+            "This will change how Jiu-jitsu is fundamentally taught and the app's user experience is seamless.",
+        name: "PJ Montano",
+        role: "PGF Referee",
+        imageSrc: "/images/PJ.png",
     },
 ];
 

@@ -1,29 +1,59 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Youtube } from "lucide-react";
 
-export const SocialsDemo = () => {
-    // We are using fallback images as we don't have an API key at our disposal.
-    // In production, these should be replaced with actual YouTube thumbnail links or dynamically fetched.
-    const videos = [
+export const SocialsDemo = async () => {
+    let videos = [
         {
-            id: 1,
-            title: "SubmissionSensAI Feature Spotlight - Daily Prompts",
-            link: "https://www.youtube.com/watch?v=a3rndO5AYaU",
-            imgSrc: "https://i.ytimg.com/vi/a3rndO5AYaU/hqdefault.jpg"
+            id: "sJ6e_y8F2XQ",
+            title: "SubmissionSensAI Feature Spotlight - Journaling",
+            link: "https://www.youtube.com/watch?v=sJ6e_y8F2XQ",
+            imgSrc: "https://i.ytimg.com/vi/sJ6e_y8F2XQ/hqdefault.jpg"
         },
         {
-            id: 2,
-            title: "How to use the PGF Dashboard",
-            link: "https://www.youtube.com/@SubmissionSensAI",
-            imgSrc: "https://images.unsplash.com/photo-1555597673-b21d5c935865?q=80&w=2670&auto=format&fit=crop"
+            id: "7l8D_F83Ue0",
+            title: "Submission Sensai Feature Spotlight - Daily Prompts",
+            link: "https://www.youtube.com/watch?v=7l8D_F83Ue0",
+            imgSrc: "https://i.ytimg.com/vi/7l8D_F83Ue0/hqdefault.jpg"
         },
         {
-            id: 3,
-            title: "BJJ Breakdown with SubmissionSensAI",
-            link: "https://www.youtube.com/@SubmissionSensAI",
-            imgSrc: "https://images.unsplash.com/photo-1599058917212-97d142f31f90?q=80&w=2669&auto=format&fit=crop"
+            id: "V1lB1c7e9aI",
+            title: "Understanding BJJ the way AI does - Relational Data",
+            link: "https://www.youtube.com/watch?v=V1lB1c7e9aI",
+            imgSrc: "https://i.ytimg.com/vi/V1lB1c7e9aI/hqdefault.jpg"
         }
-    ]
+    ];
+
+    try {
+        const res = await fetch('https://www.youtube.com/feeds/videos.xml?channel_id=UC29tATlLM-H1-jo8a3WD_Nw', {
+            next: { revalidate: 3600 }
+        });
+        const text = await res.text();
+        
+        const fetchedVideos = [];
+        const entryRegex = /<entry>([\s\S]*?)<\/entry>/g;
+        let match;
+        while ((match = entryRegex.exec(text)) !== null && fetchedVideos.length < 3) {
+            const entry = match[1];
+            const idMatch = entry.match(/<yt:videoId>([^<]+)<\/yt:videoId>/);
+            const titleMatch = entry.match(/<title>([^<]+)<\/title>/);
+            if (idMatch && titleMatch) {
+                fetchedVideos.push({
+                    id: idMatch[1],
+                    title: titleMatch[1].replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'"),
+                    link: `https://www.youtube.com/watch?v=${idMatch[1]}`,
+                    imgSrc: `https://i.ytimg.com/vi/${idMatch[1]}/hqdefault.jpg`
+                });
+            }
+        }
+        
+        if (fetchedVideos.length === 3) {
+            videos = fetchedVideos;
+        } else if (fetchedVideos.length > 0) {
+            videos = [...fetchedVideos, ...videos.slice(fetchedVideos.length, 3)];
+        }
+    } catch (error) {
+        console.error("Failed to fetch YouTube videos:", error);
+    }
 
     return (
         <section className="w-full bg-background py-16 sm:py-24">
